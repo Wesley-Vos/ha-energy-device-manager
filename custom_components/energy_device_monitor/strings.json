@@ -2,8 +2,11 @@
   "config": {
     "step": {
       "user": {
+        "title": "Tariffs",
+        "description": "Tariff price entities to be used by the devices",
         "data": {
-          "host": "[%key:common::config_flow::data::host%]"
+          "conf_low_tariff_entity": "Entity for low tariff price",
+          "conf_high_tariff_entity": "Entity for high tariff price"
         }
       }
     },
@@ -24,7 +27,12 @@
       "step": {
         "user": {
           "title": "Add device",
-          "description": "Configure the device"
+          "description": "Configure the device",
+          "data": {
+            "conf_low_consumption_entity": "Entity of low tariff energy consumption of device",
+            "conf_high_consumption_entity": "Entity of high tariff energy consumption of device",
+            "conf_device_name": "Device name"
+          }
         }
       },
       "error": {
