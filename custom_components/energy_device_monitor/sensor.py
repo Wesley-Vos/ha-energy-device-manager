@@ -169,7 +169,7 @@ class TotalDailyCostSensor(EnergyDeviceMonitorSensor):
     @property
     def name(self) -> str:
         """Return the name of the sensor."""
-        return f"Util cost {self._device_name} daily"
+        return f"Electricity cost {self._device_name.lower()} (daily)"
 
     @property
     def available(self) -> bool:
@@ -220,7 +220,7 @@ class DailyLowCostSensor(EnergyDeviceMonitorSensor):
     @property
     def name(self) -> str:
         """Return the name of the sensor."""
-        return f"Util cost {self._device_name} T1 daily"
+        return f"Electricity cost {self._device_name.lower()} low tariff (daily)"
 
     @property
     def available(self) -> bool:
@@ -242,7 +242,7 @@ class DailyHighCostSensor(EnergyDeviceMonitorSensor, SensorEntity):
         entry: EnergyDeviceMonitorConfigEntry,
         sub_entry: ConfigSubentry,
     ) -> None:
-        """Initialize the daily low cost sensor."""
+        """Initialize the daily high cost sensor."""
         super().__init__(
             hass,
             entry,
@@ -258,7 +258,7 @@ class DailyHighCostSensor(EnergyDeviceMonitorSensor, SensorEntity):
     @property
     def name(self) -> str:
         """Return the name of the sensor."""
-        return f"Util cost {self._device_name} T2 daily"
+        return f"Electricity cost {self._device_name.lower()} high tariff (daily)"
 
     @property
     def available(self) -> bool:
@@ -299,7 +299,7 @@ class TotalDailyConsumptionSensor(EnergyDeviceMonitorSensor, SensorEntity):
     @property
     def name(self) -> str:
         """Return the name of the sensor."""
-        return f"Util energy {self._device_name} daily"
+        return f"Electricity usage {self._device_name.lower()} (daily)"
 
     @property
     def available(self) -> bool:
