@@ -1,6 +1,8 @@
 """Energy device monitor sensor entities for Home Assistant."""
 
 from dataclasses import dataclass
+from datetime import datetime, time
+import zoneinfo
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
@@ -8,7 +10,7 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.config_entries import ConfigSubentry
-from homeassistant.const import STATE_UNAVAILABLE
+from homeassistant.const import STATE_UNAVAILABLE, UnitOfEnergy
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.event import async_track_state_change_event
@@ -186,6 +188,12 @@ class TotalDailyCostSensor(EnergyDeviceMonitorSensor):
             self.high_tariff_state.state * self.high_consumption_state.state
         )
 
+    @property
+    def last_reset(self) -> datetime:
+        """Return the last reset time for the sensor."""
+        tz = zoneinfo.ZoneInfo(self.hass.config.time_zone)
+        return datetime.combine(datetime.now(tz).date(), time.min, tzinfo=tz)
+
 
 class DailyLowCostSensor(EnergyDeviceMonitorSensor):
     """Representation of a daily low cost sensor for the energy device monitor."""
@@ -208,7 +216,6 @@ class DailyLowCostSensor(EnergyDeviceMonitorSensor):
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_native_unit_of_measurement = "EUR"
         self._attr_suggested_display_precision = 2
-        self._attr_state_class = SensorStateClass.TOTAL
 
     @property
     def name(self) -> str:
@@ -247,7 +254,6 @@ class DailyHighCostSensor(EnergyDeviceMonitorSensor, SensorEntity):
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_native_unit_of_measurement = "EUR"
         self._attr_suggested_display_precision = 2
-        self._attr_state_class = SensorStateClass.TOTAL
 
     @property
     def name(self) -> str:
@@ -286,7 +292,7 @@ class TotalDailyConsumptionSensor(EnergyDeviceMonitorSensor, SensorEntity):
         )
         self._attr_unique_id = f"{self._device_name}_total_daily_consumption_sensor"
         self._attr_device_class = SensorDeviceClass.ENERGY
-        self._attr_native_unit_of_measurement = "kWh"
+        self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
         self._attr_suggested_display_precision = 3
         self._attr_state_class = SensorStateClass.TOTAL_INCREASING
 
