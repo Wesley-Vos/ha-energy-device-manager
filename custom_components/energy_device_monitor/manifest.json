@@ -1,0 +1,15 @@
+{
+  "domain": "energy_device_monitor",
+  "name": "Energy device monitor",
+  "codeowners": ["@wesley-vos"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://www.home-assistant.io/integrations/energy_device_monitor",
+  "homekit": {},
+  "iot_class": "calculated",
+  "quality_scale": "bronze",
+  "requirements": [],
+  "single_config_entry": true,
+  "ssdp": [],
+  "zeroconf": []
+}

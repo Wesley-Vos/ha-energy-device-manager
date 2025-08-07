@@ -1,0 +1,32 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured"
+        },
+        "error": {
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "host": "Host"
+                }
+            }
+        }
+    },
+    "config_subentries": {
+        "device": {
+            "entry_type": "Device",
+            "initiate_flow": {
+                "reconfigure": "Reconfigure device",
+                "user": "Add device"
+            },
+            "step": {
+                "user": {
+                    "description": "Configure the device",
+                    "title": "Add device"
+                }
+            }
+        }
+    }
+}
