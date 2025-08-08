@@ -40,5 +40,11 @@
       "abort": {
       }
     }
+  },
+  "entity": {
+    "sensor": {
+    "total_cost": {
+      "name": "Electricity cost {device_name} (dailyy)"
+    }}
   }
 }

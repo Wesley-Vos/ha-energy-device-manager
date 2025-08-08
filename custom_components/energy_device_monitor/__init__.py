@@ -8,7 +8,6 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryError
 
 from .const import CONF_HIGH_TARIFF_ENTITY, CONF_LOW_TARIFF_ENTITY
-from .controller import Controller
 
 _PLATFORMS: list[Platform] = [Platform.SENSOR]
 
@@ -21,11 +20,6 @@ async def async_setup_entry(
     """Set up Energy device monitor from a config entry."""
 
     try:
-        # controller = Controller(
-        #     hass,
-        #     entry.data[CONF_LOW_TARIFF_ENTITY],
-        #     entry.data[CONF_HIGH_TARIFF_ENTITY],
-        # )
         i = 0
     except Exception as ex:
         raise ConfigEntryError("Cannot setup controller") from ex

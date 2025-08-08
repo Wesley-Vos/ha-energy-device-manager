@@ -5,6 +5,7 @@ from datetime import datetime, time
 import zoneinfo
 
 from homeassistant.components.sensor import (
+    ENTITY_ID_FORMAT,
     SensorDeviceClass,
     SensorEntity,
     SensorStateClass,
@@ -12,6 +13,7 @@ from homeassistant.components.sensor import (
 from homeassistant.config_entries import ConfigSubentry
 from homeassistant.const import STATE_UNAVAILABLE, UnitOfEnergy
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import generate_entity_id
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.event import async_track_state_change_event
 
@@ -160,16 +162,16 @@ class TotalDailyCostSensor(EnergyDeviceMonitorSensor):
             include_high_tariff=True,
             include_high_consumption=True,
         )
+        self.entity_id = generate_entity_id(ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_daily", hass=hass)
         self._attr_unique_id = f"{self._device_name}_total_daily_cost_sensor"
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_native_unit_of_measurement = "EUR"
         self._attr_suggested_display_precision = 2
         self._attr_state_class = SensorStateClass.TOTAL
-
-    @property
-    def name(self) -> str:
-        """Return the name of the sensor."""
-        return f"Electricity cost {self._device_name.lower()} (daily)"
+        self._attr_translation_key = "total_cost"
+        self._attr_translation_placeholders = {
+                "device_name": self._device_name.lower()
+        }
 
     @property
     def available(self) -> bool:
@@ -212,6 +214,7 @@ class DailyLowCostSensor(EnergyDeviceMonitorSensor):
             include_low_tariff=True,
             include_low_consumption=True,
         )
+        self.entity_id = generate_entity_id(ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_t1_daily", hass=hass)
         self._attr_unique_id = f"{self._device_name}_daily_low_cost_sensor"
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_native_unit_of_measurement = "EUR"
@@ -250,6 +253,7 @@ class DailyHighCostSensor(EnergyDeviceMonitorSensor, SensorEntity):
             include_high_tariff=True,
             include_high_consumption=True,
         )
+        self.entity_id = generate_entity_id(ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_t2_daily", hass=hass)
         self._attr_unique_id = f"{self._device_name}_sensor_daily_high_cost"
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_native_unit_of_measurement = "EUR"
@@ -290,6 +294,7 @@ class TotalDailyConsumptionSensor(EnergyDeviceMonitorSensor, SensorEntity):
             include_low_consumption=True,
             include_high_consumption=True,
         )
+        self.entity_id = generate_entity_id(ENTITY_ID_FORMAT, f"util_energy_{self._device_name}_daily", hass=hass)
         self._attr_unique_id = f"{self._device_name}_total_daily_consumption_sensor"
         self._attr_device_class = SensorDeviceClass.ENERGY
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
