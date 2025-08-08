@@ -28,6 +28,7 @@
                 "user": {
                     "data": {
                         "conf_device_name": "Apparaatnaam",
+                        "conf_device_key": "Apparaatkey",
                         "conf_high_consumption_entity": "Entiteit van hoog tarief elektrisiteitsverbruik van apparaat",
                         "conf_low_consumption_entity": "Entiteit van laag tarief elektrisiteitsverbruik van apparaat"
                     },

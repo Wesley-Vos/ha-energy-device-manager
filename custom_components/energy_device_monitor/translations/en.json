@@ -28,6 +28,7 @@
                 "user": {
                     "data": {
                         "conf_device_name": "Device name",
+                        "conf_device_key": "Device key",
                         "conf_high_consumption_entity": "Entity of high tariff energy consumption of device",
                         "conf_low_consumption_entity": "Entity of low tariff energy consumption of device"
                     },
