@@ -1,31 +1,46 @@
 {
     "config": {
         "abort": {
-            "already_configured": "Device is already configured"
+            "already_configured": "Apparaat"
         },
         "error": {
-            "unknown": "Unexpected error"
+            "unknown": "Onverwachte fout"
         },
         "step": {
             "user": {
                 "data": {
-                    "host": "Host"
-                }
+                    "conf_high_tariff_entity": "Entiteit van hoog tarief prijs",
+                    "conf_low_tariff_entity": "Entities van laag tarief prijs"
+                },
+                "description": "De tarief prijs entiteiten voor de apparaten",
+                "title": "Tarieven"
             }
         }
     },
     "config_subentries": {
         "device": {
-            "entry_type": "Device",
+            "entry_type": "Apparaat",
             "initiate_flow": {
-                "reconfigure": "Reconfigure device",
+                "reconfigure": "Herconfigureer apparaat",
                 "user": "Apparaat toevoegen"
             },
             "step": {
                 "user": {
-                    "description": "Configure the device",
-                    "title": "Add device"
+                    "data": {
+                        "conf_device_name": "Apparaatnaam",
+                        "conf_high_consumption_entity": "Entiteit van hoog tarief elektrisiteitsverbruik van apparaat",
+                        "conf_low_consumption_entity": "Entiteit van laag tarief elektrisiteitsverbruik van apparaat"
+                    },
+                    "description": "Configureer het apparaat",
+                    "title": "Apparaat toevoegen"
                 }
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "total_cost": {
+                "name": "Elektriciteitskosten {device_name} (dagelijks)"
             }
         }
     }

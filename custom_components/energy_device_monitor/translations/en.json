@@ -9,9 +9,11 @@
         "step": {
             "user": {
                 "data": {
-                  "conf_low_tariff_entity": "Entity for low tariff price",
-          "conf_high_tariff_entity": "Entity for high tariff price"
-        }
+                    "conf_high_tariff_entity": "Entity for high tariff price",
+                    "conf_low_tariff_entity": "Entity for low tariff price"
+                },
+                "description": "Tariff price entities to be used by the devices",
+                "title": "Tariffs"
             }
         }
     },
@@ -24,22 +26,22 @@
             },
             "step": {
                 "user": {
-                    "description": "Configure the device",
-                    "title": "Add device",
                     "data": {
-                      "conf_low_consumption_entity": "Entity of low tariff energy consumption of device",
-            "conf_high_consumption_entity": "Entity of high tariff energy consumption of device",
-            "conf_device_name": "Device name"
-                    }
+                        "conf_device_name": "Device name",
+                        "conf_high_consumption_entity": "Entity of high tariff energy consumption of device",
+                        "conf_low_consumption_entity": "Entity of low tariff energy consumption of device"
+                    },
+                    "description": "Configure the device",
+                    "title": "Add device"
                 }
             }
         }
     },
     "entity": {
-      "sensor": {
-	"total_cost": {
-          "name": "Electricity cost {device_name} (dailyy)"
-      }
-     }      
+        "sensor": {
+            "total_cost": {
+                "name": "Electricity cost {device_name} (dailyy)"
+            }
+        }
     }
 }

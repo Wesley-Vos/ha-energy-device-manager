@@ -50,6 +50,7 @@ async def async_setup_entry(
             TotalDailyCostSensor(hass, entry, subentry),
             TotalDailyConsumptionSensor(hass, entry, subentry),
         ]
+
         async_add_entities(
             entities, update_before_add=True, config_subentry_id=subentry.subentry_id
         )
@@ -57,6 +58,8 @@ async def async_setup_entry(
 
 class EnergyDeviceMonitorSensor(SensorEntity):
     """Representation of an energy device monitor sensor."""
+
+    _attr_has_entity_name = True
 
     _entry: EnergyDeviceMonitorConfigEntry
     _subentry: ConfigSubentry
@@ -146,6 +149,8 @@ class EnergyDeviceMonitorSensor(SensorEntity):
 class TotalDailyCostSensor(EnergyDeviceMonitorSensor):
     """Representation of a total daily cost sensor for the energy device monitor."""
 
+    _attr_translation_key = "total_cost"
+
     def __init__(
         self,
         hass: HomeAssistant,
@@ -162,16 +167,16 @@ class TotalDailyCostSensor(EnergyDeviceMonitorSensor):
             include_high_tariff=True,
             include_high_consumption=True,
         )
-        self.entity_id = generate_entity_id(ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_daily", hass=hass)
+        self.entity_id = generate_entity_id(
+            ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_daily", hass=hass
+        )
         self._attr_unique_id = f"{self._device_name}_total_daily_cost_sensor"
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_native_unit_of_measurement = "EUR"
         self._attr_suggested_display_precision = 2
         self._attr_state_class = SensorStateClass.TOTAL
-        self._attr_translation_key = "total_cost"
-        self._attr_translation_placeholders = {
-                "device_name": self._device_name.lower()
-        }
+
+        self._attr_translation_placeholders = {"device_name": self._device_name.lower()}
 
     @property
     def available(self) -> bool:
@@ -214,7 +219,9 @@ class DailyLowCostSensor(EnergyDeviceMonitorSensor):
             include_low_tariff=True,
             include_low_consumption=True,
         )
-        self.entity_id = generate_entity_id(ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_t1_daily", hass=hass)
+        self.entity_id = generate_entity_id(
+            ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_t1_daily", hass=hass
+        )
         self._attr_unique_id = f"{self._device_name}_daily_low_cost_sensor"
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_native_unit_of_measurement = "EUR"
@@ -253,7 +260,9 @@ class DailyHighCostSensor(EnergyDeviceMonitorSensor, SensorEntity):
             include_high_tariff=True,
             include_high_consumption=True,
         )
-        self.entity_id = generate_entity_id(ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_t2_daily", hass=hass)
+        self.entity_id = generate_entity_id(
+            ENTITY_ID_FORMAT, f"util_cost_{self._device_name}_t2_daily", hass=hass
+        )
         self._attr_unique_id = f"{self._device_name}_sensor_daily_high_cost"
         self._attr_device_class = SensorDeviceClass.MONETARY
         self._attr_native_unit_of_measurement = "EUR"
@@ -294,7 +303,9 @@ class TotalDailyConsumptionSensor(EnergyDeviceMonitorSensor, SensorEntity):
             include_low_consumption=True,
             include_high_consumption=True,
         )
-        self.entity_id = generate_entity_id(ENTITY_ID_FORMAT, f"util_energy_{self._device_name}_daily", hass=hass)
+        self.entity_id = generate_entity_id(
+            ENTITY_ID_FORMAT, f"util_energy_{self._device_name}_daily", hass=hass
+        )
         self._attr_unique_id = f"{self._device_name}_total_daily_consumption_sensor"
         self._attr_device_class = SensorDeviceClass.ENERGY
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR

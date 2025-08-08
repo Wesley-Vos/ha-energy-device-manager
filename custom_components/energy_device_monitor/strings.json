@@ -35,16 +35,15 @@
           }
         }
       },
-      "error": {
-      },
-      "abort": {
-      }
+      "error": {},
+      "abort": {}
     }
   },
   "entity": {
     "sensor": {
-    "total_cost": {
-      "name": "Electricity cost {device_name} (dailyy)"
-    }}
+      "total_cost": {
+        "name": "Electricity cost {device_name} (dailyy)"
+      }
+    }
   }
 }
