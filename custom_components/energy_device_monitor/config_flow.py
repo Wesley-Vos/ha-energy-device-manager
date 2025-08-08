@@ -20,6 +20,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers import selector
 
 from .const import (
+    CONF_DEVICE_FRIENDLY_NAME,
     CONF_DEVICE_NAME,
     CONF_HIGH_CONSUMPTION_ENTITY,
     CONF_HIGH_TARIFF_ENTITY,
@@ -86,7 +87,7 @@ class ConfigFlow(ConfigFlow, domain=DOMAIN):
 SUB_STEP_USER_DATA_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_DEVICE_NAME): str,
-        vol.Required(CONF_LOW_CONSUMPTION_ENTITY): selector.EntitySelector(
+        vol.Required(CONF_DEVICE_FRIENDLY_NAME): str, vol.Required(CONF_LOW_CONSUMPTION_ENTITY): selector.EntitySelector(
             selector.EntitySelectorConfig(domain=[SENSOR_DOMAIN, INPUT_NUMBER_DOMAIN]),
         ),
         vol.Required(CONF_HIGH_CONSUMPTION_ENTITY): selector.EntitySelector(
@@ -103,6 +104,7 @@ async def validate_device_input(
 
     return {
         "device_name": data[CONF_DEVICE_NAME],
+        "device_friendly_name": data[CONF_DEVICE_FRIENDLY_NAME],
         "low_consumption_entity": data[CONF_LOW_CONSUMPTION_ENTITY],
         "high_consumption_entity": data[CONF_HIGH_CONSUMPTION_ENTITY],
     }

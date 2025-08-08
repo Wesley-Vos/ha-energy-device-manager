@@ -19,6 +19,7 @@ from homeassistant.helpers.event import async_track_state_change_event
 
 from . import EnergyDeviceMonitorConfigEntry
 from .const import (
+    CONF_DEVICE_FRIENDLY_NAME,
     CONF_DEVICE_NAME,
     CONF_HIGH_CONSUMPTION_ENTITY,
     CONF_HIGH_TARIFF_ENTITY,
@@ -64,6 +65,7 @@ class EnergyDeviceMonitorSensor(SensorEntity):
     _entry: EnergyDeviceMonitorConfigEntry
     _subentry: ConfigSubentry
     _device_name: str
+    _device_friendly_name: str
 
     _include_low_consumption: bool
     _include_high_consumption: bool
@@ -90,12 +92,13 @@ class EnergyDeviceMonitorSensor(SensorEntity):
         self._entry = entry
         self._subentry = subentry
         self._device_name = subentry.data[CONF_DEVICE_NAME]
+        self._device_friendly_name = subentry.data[CONF_DEVICE_FRIENDLY_NAME]
         self._include_low_consumption = include_low_consumption
         self._include_high_consumption = include_high_consumption
         self._include_low_tariff = include_low_tariff
         self._include_high_tariff = include_high_tariff
     
-        self._attr_translation_placeholders = {"device_name": self._device_name.lower()}
+        self._attr_translation_placeholders = {"device_name": self._device_friendly_name.lower()}
 
         entities_to_track = []
         if include_low_tariff:
