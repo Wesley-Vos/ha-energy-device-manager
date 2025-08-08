@@ -41,7 +41,16 @@
         "sensor": {
             "total_cost": {
                 "name": "Elektriciteitskosten {device_name} (dagelijks)"
-            }
+            },
+            "low_cost": {
+        "name": "Elektriciteitskosten {device_name} laag tarief (dagelijks)" 
+      },
+      "high_cost": {
+        "name": "Elektriciteitskosten {device_name} hoog tarief (dagelijks)" 
+      },
+      "total_consumption": {
+        "name": "Elektriciteitsverbruik {device_name} (dagelijks)" 
+      }
         }
     }
 }

@@ -42,7 +42,16 @@
   "entity": {
     "sensor": {
       "total_cost": {
-        "name": "Electricity cost {device_name} (dailyy)"
+        "name": "Electricity cost {device_name} (daily)" 
+      },
+      "low_cost": {
+        "name": "Electricity cost {device_name} low tariff (daily)" 
+      },
+      "high_cost": {
+        "name": "Electricity cost {device_name} high tariff (daily)" 
+      },
+      "total_consumption": {
+        "name": "Electricity usage {device_name} (daily)" 
       }
     }
   }

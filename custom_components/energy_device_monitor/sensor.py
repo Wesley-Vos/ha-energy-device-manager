@@ -94,6 +94,8 @@ class EnergyDeviceMonitorSensor(SensorEntity):
         self._include_high_consumption = include_high_consumption
         self._include_low_tariff = include_low_tariff
         self._include_high_tariff = include_high_tariff
+    
+        self._attr_translation_placeholders = {"device_name": self._device_name.lower()}
 
         entities_to_track = []
         if include_low_tariff:
@@ -176,7 +178,6 @@ class TotalDailyCostSensor(EnergyDeviceMonitorSensor):
         self._attr_suggested_display_precision = 2
         self._attr_state_class = SensorStateClass.TOTAL
 
-        self._attr_translation_placeholders = {"device_name": self._device_name.lower()}
 
     @property
     def available(self) -> bool:
@@ -204,6 +205,8 @@ class TotalDailyCostSensor(EnergyDeviceMonitorSensor):
 
 class DailyLowCostSensor(EnergyDeviceMonitorSensor):
     """Representation of a daily low cost sensor for the energy device monitor."""
+    
+    _attr_translation_key = "low_cost"
 
     def __init__(
         self,
@@ -228,11 +231,6 @@ class DailyLowCostSensor(EnergyDeviceMonitorSensor):
         self._attr_suggested_display_precision = 2
 
     @property
-    def name(self) -> str:
-        """Return the name of the sensor."""
-        return f"Electricity cost {self._device_name.lower()} low tariff (daily)"
-
-    @property
     def available(self) -> bool:
         """Return if the sensor is available."""
         return self.low_tariff_state.available and self.low_consumption_state.available
@@ -245,6 +243,8 @@ class DailyLowCostSensor(EnergyDeviceMonitorSensor):
 
 class DailyHighCostSensor(EnergyDeviceMonitorSensor, SensorEntity):
     """Representation of a daily high cost sensor for the energy device monitor."""
+    
+    _attr_translation_key = "high_cost"
 
     def __init__(
         self,
@@ -269,11 +269,6 @@ class DailyHighCostSensor(EnergyDeviceMonitorSensor, SensorEntity):
         self._attr_suggested_display_precision = 2
 
     @property
-    def name(self) -> str:
-        """Return the name of the sensor."""
-        return f"Electricity cost {self._device_name.lower()} high tariff (daily)"
-
-    @property
     def available(self) -> bool:
         """Return if the sensor is available."""
         return (
@@ -288,6 +283,8 @@ class DailyHighCostSensor(EnergyDeviceMonitorSensor, SensorEntity):
 
 class TotalDailyConsumptionSensor(EnergyDeviceMonitorSensor, SensorEntity):
     """Representation of a total daily consumption sensor for the energy device monitor."""
+    
+    _attr_translation_key = "total_consumption"
 
     def __init__(
         self,
@@ -311,11 +308,6 @@ class TotalDailyConsumptionSensor(EnergyDeviceMonitorSensor, SensorEntity):
         self._attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
         self._attr_suggested_display_precision = 3
         self._attr_state_class = SensorStateClass.TOTAL_INCREASING
-
-    @property
-    def name(self) -> str:
-        """Return the name of the sensor."""
-        return f"Electricity usage {self._device_name.lower()} (daily)"
 
     @property
     def available(self) -> bool:
